@@ -5,7 +5,7 @@ client.query(`
         id SERIAL PRIMARY KEY,
         name VARCHAR(256) UNIQUE NOT NULL,
         host VARCHAR(256),
-        category VARCHAR(256),
+        category VARCHAR(256)
     );
 `)
     .then(
