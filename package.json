@@ -14,7 +14,8 @@
     "start": "node server.js",
     "db:create": "node db/create-db.js",
     "db:drop": "node db/drop-tables.js",
-    "db:load": "node db/load-db.js"
+    "db:load": "node db/load-db.js",
+    "db:all": "npm run db:drop && npm run db:create && npm run db:load"
   },
   "repository": {
     "type": "git",
