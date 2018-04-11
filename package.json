@@ -1,0 +1,43 @@
+{
+  "name": "http-routes",
+  "version": "1.0.0",
+  "description": "## Overview Playing around with HTTP route code.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "db:create": "node create-db.js",
+    "db:delete": "node drop-tables.js",
+    "db:load": "node load-db.js",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "mocha": "mocha",
+    "test": "npm run mocha",
+    "test:watch": "npm run mocha -- -w",
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorbofill/http-routes.git"
+  },
+  "author": "Victor Bofill <victorm.bofill@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/victorbofill/http-routes/issues"
+  },
+  "homepage": "https://github.com/victorbofill/http-routes#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^4.19.1",
+    "mocha": "^5.0.5",
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "pg": "^7.4.1"
+  }
+}
