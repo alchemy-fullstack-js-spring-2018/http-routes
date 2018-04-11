@@ -6,7 +6,7 @@ const podPromises = podcasts.map(podcast => {
     return client.query(
         `INSERT INTO podcasts(name)
         VALUES($1)
-        ON CONFLICT DO NOTHING:`,
+        ON CONFLICT DO NOTHING;`,
         [podcast]
     );
 });
