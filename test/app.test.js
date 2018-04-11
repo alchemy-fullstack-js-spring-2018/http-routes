@@ -7,3 +7,6 @@ const app = require('../lib/app');
 const { assert } = chai;
 chai.use(chaitHttp);
 
+describe('blazers', () => {
+    
+})
