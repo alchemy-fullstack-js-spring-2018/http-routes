@@ -8,9 +8,9 @@
     "test": "test"
   },
   "scripts": {
-    "db:create": "node create-db.js",
-    "db:delete": "node drop-tables.js",
-    "db:load": "node load-db.js",
+    "db:create": "node ./db/create-db.js",
+    "db:delete": "node ./db/drop-tables.js",
+    "db:load": "node ./db/load-db.js",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "mocha": "mocha",

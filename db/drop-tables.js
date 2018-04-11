@@ -2,11 +2,7 @@
 
 const client = require('../lib/db-client');
 
-client.query(`
-DROP TABLE IF EXISTS /* first table */,
-DROP TABLE IF EXISTS /* second table */,
-;
-`)
+client.query(`DROP TABLE IF EXISTS friends;`)
     .then(
         () => console.log('All tables successfully removed'),
         err => console.error(err)

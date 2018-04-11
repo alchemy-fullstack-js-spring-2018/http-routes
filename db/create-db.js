@@ -3,9 +3,10 @@
 const client = require('../lib/db-client');
 
 client.query(`
-    CREATE TABLE IF NOT EXISTS /* table name */(
-        /* column name */ /* data type */ NOT NULL,
-        /* second column name */ /* data type */ NOT NULL
+    CREATE TABLE IF NOT EXISTS friends(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(256) NOT NULL,
+        role TEXT NOT NULL
     )
 `).then(
     () => console.log('Table successfully created'),

@@ -1,19 +1,29 @@
 'use strict';
 
-const client = require('../db/db-client');
-const rawData = require(/* raw data, json */);
+const client = require('../lib/db-client');
+const friends = require('../data/friends');
 
-Promise.all(books.map(book => {
+const friendPromises = friends.map(friend => {
     return client.query(
         `
-        INSERT INTO /* table */(
-            /* column one */, /* column two */
+        INSERT INTO friends(
+            name, role
         )
         VALUES ($1, $2);
         `,
-        [rawData.property1, rawData.property2]
+        [friend.name, friend.role]
     );
-}))
+});
+
+Promise.all(friendPromises)
+    .then(() => {
+        return client.query(
+            `SELECT * FROM friends`
+        );
+    })
+    .then(
+        result => {console.log(result.rows);}
+    )
     .then(
         () => console.log('Table successfully populated'),
         err => console.error(err))
