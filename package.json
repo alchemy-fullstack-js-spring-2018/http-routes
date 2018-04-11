@@ -12,7 +12,8 @@
     "mocha": "mocha",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "db:create": "node db/create-db.js"
+    "db:create": "node db/create-db.js",
+    "db:drop": "node db/drop-tables.js"
   },
   "repository": {
     "type": "git",
