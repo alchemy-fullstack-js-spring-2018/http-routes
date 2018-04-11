@@ -1,0 +1,32 @@
+{
+  "name": "git-template",
+  "version": "1.0.0",
+  "description": "## Overview A brief description of the project",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "db:create": "node create-db.js",
+    "db:delete": "node drop-tables.js",
+    "db:load": "node load-db.js",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "mocha": "mocha",
+    "test": "npm run mocha",
+    "test:watch": "npm run mocha -- -w",
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jklipton/git-template.git"
+  },
+  "author": "Jennifer Lipton <jkl.lipton@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jklipton/git-template/issues"
+  },
+  "homepage": "https://github.com/jklipton/git-template#readme"
+}
