@@ -1,3 +1,4 @@
+require('dotenv').config({ path: './test/.env.test' });
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const client = require('../lib/db-client');
@@ -7,11 +8,26 @@ const { assert } = chai;
 chai.use(chaiHttp);
 
 describe('podcasts', () => {
-    it('hello world', () => {
+
+    const allPods = [{ name:'The Read', host: 'Kid Fury & Crissle', category:'Comedy' }, { name: 'She Explores', host: 'Gale Straub', category: 'Outdoor' }, { name: 'Welcome to Night Vale', host: 'Cecil Plamer', category: 'Comedy' }];
+
+    it.only('configured env', () => {
+        assert.equal(process.env.DATABASE_URL,
+            'postgres://localhost:5432/podcasts_test'
+        );
+    });
+
+    it('gets all podcast', () => {
         return chai.request(app)
-            .get('/')
-            .then(response => {
-                assert.equal(response.text, 'hello world');
+            .get('/podcasts')
+            .then(({ body }) => {
+                console.log('BODY!!', body);
+                assert.deepEqual(body, allPods);
             });
     });
+
+    after(() => {
+        client.end();
+    });
+
 });
