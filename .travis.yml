@@ -5,4 +5,4 @@ services:
   - postgresql
 before_script:
   - psql -c 'routes_test;' -U postgres
-  - npm run name_of_your_npm_script
+  - npm run start
