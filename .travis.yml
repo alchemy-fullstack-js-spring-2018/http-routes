@@ -4,6 +4,6 @@ node_js:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database name_of_database;' -U postgres
+  - psql -c 'create database books;' -U postgres
 
   - npm run db:create
