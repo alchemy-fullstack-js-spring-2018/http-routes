@@ -2,11 +2,18 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const client = require('../lib/db-client');
 const app = require('../lib/app');
+const table = require('../db/db-all');
 
 const { assert } = chai;
 chai.use(chaiHttp);
 
 describe('Bands', () => {
+
+    before(() => {
+        table.dropTable();
+        table.createTable();
+        table.loadTable();
+    });
 
     it('GET all bands', () => {
         return chai.request(app)
@@ -53,6 +60,14 @@ describe('Bands', () => {
             .send({ name: 'Shame from London' })
             .then(({ body }) => {
                 assert.deepEqual(body.name, 'Shame from London');
+            });
+    });
+
+    it('GET - 404 error', () => {
+        return chai.request(app)
+            .get('/wherever')
+            .then(res => {
+                assert.equal(res.statusCode, 404);
             });
     });
 
