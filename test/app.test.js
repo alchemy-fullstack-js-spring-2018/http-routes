@@ -11,7 +11,7 @@ describe('podcasts', () => {
         return chai.request(app)
             .get('/')
             .then(response => {
-                assert.equal(response.text, 'hellow world');
+                assert.equal(response.text, 'hello world');
             });
     });
 });
