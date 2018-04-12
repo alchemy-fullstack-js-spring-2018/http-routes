@@ -6,7 +6,7 @@ client.query(`
   CREATE TABLE IF NOT EXISTS books(
     id SERIAL PRIMARY KEY,
     title VARCHAR(256),
-    author VARCHAR(256),
+    author VARCHAR(256)
   );
 `)
     .then(
