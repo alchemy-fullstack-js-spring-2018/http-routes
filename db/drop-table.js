@@ -1,7 +1,7 @@
 const client = require('../lib/db-client');
 
 client.query(`
-    DROP TABLE birds;
+    DROP TABLE IF EXISTS birds;
 `)
     .then(
         /* eslint-disable no-console */
