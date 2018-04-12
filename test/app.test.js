@@ -8,7 +8,9 @@ chai.use(chaiHttp);
 
 describe('Bands', () => {
 
-    it('Gets all bands', () => {
+    
+
+    it('GET all bands', () => {
         return chai.request(app)
             .get('/bands')
             .then(({ body }) => {
@@ -18,11 +20,32 @@ describe('Bands', () => {
             });
     });
 
-    it('Gets one band', () => {
+    it('GET one band', () => {
         return chai.request(app)
             .get('/bands/3')
             .then(({ body }) => {
                 assert.deepEqual(body, { id: 3, name: 'Ought' });
+            });
+    });
+
+    it('POST a band', () => {
+        return chai.request(app)
+            .post('/bands')
+            .send({ name: 'Iceage' })
+            .then(({ body }) => {
+                assert.equal(body.name, 'Iceage');
+            });
+    });
+
+    it('DELETE a band', () => {
+        return chai.request(app)
+            .del('/bands/4')
+            .then(() => {
+                return chai.request(app)
+                    .get('/bands');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body.length, 3);
             });
     });
 
