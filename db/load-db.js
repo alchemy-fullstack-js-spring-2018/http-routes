@@ -6,7 +6,7 @@ const categories = ['marine', 'terrestrial'];
 
 const categoryPromises = categories.map(category => {
     return client.query(
-        `INSERT INTO categories(name) 
+        `INSERT INTO habitat(name) 
         VALUES($1)
         ON CONFLICT DO NOTHING;`,
         [category]
@@ -16,7 +16,7 @@ const categoryPromises = categories.map(category => {
 Promise.all(categoryPromises)
     .then(() => {
         return client.query(
-            `SELECT * FROM categories`
+            `SELECT * FROM habitat`
         );
     })
     .then(result => {

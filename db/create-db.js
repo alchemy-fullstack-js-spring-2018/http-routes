@@ -7,10 +7,10 @@ client.query(`
   );
   CREATE TABLE IF NOT EXISTS invertebrates(
     id SERIAL PRIMARY KEY,
-    order VARCHAR(256),
+    orders VARCHAR(256),
     species VARCHAR(256),
     common_name VARCHAR(256),
-    category_id INTEGER NOT NULL REFERENCES categories(id),
+    category_id INTEGER NOT NULL REFERENCES habitat(id),
     description VARCHAR(256)
   );
 `)

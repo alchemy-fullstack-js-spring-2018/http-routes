@@ -6,7 +6,7 @@ client.query(`
   DROP TABLE invertebrates;
 `)
     .then(
-        () => console.log('successfullt dropped table'),
+        () => console.log('successfully dropped table'),
         err => console.error(err)
     )
     .then(() => {
