@@ -72,5 +72,15 @@ describe('books', () => {
             });
     });
     
-
+    it('deletes book by id', () => {
+        return chai.request(app)
+            .del(`/books/${deadZone.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/books');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [misery]);
+            });
+    });
 });
