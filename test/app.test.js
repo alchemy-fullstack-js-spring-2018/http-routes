@@ -8,8 +8,6 @@ chai.use(chaiHttp);
 
 describe('Bands', () => {
 
-    
-
     it('GET all bands', () => {
         return chai.request(app)
             .get('/bands')
@@ -49,7 +47,14 @@ describe('Bands', () => {
             });
     });
 
-
+    it('PUT/update a band', () => {
+        return chai.request(app)
+            .put('/bands/2')
+            .send({ name: 'Shame from London' })
+            .then(({ body }) => {
+                assert.deepEqual(body.name, 'Shame from London');
+            });
+    });
 
     after(() => {
         client.end();
