@@ -11,15 +11,17 @@ chai.use(chaiHttp);
 describe('breeds', () => {
 
     before(() => client.query(`
-        DELETE FROM breeds WHERE name='loaf'; `));
+        ALTER TABLE breeds DISABLE TRIGGER ALL;
+        DELETE FROM breeds; 
+        ALTER TABLE breeds ENABLE TRIGGER ALL;`));
 
     let loaf = {
         name: 'loaf',
         description: `no legs, all bread, don't care`
     };
-    let loaf = {
-        name: 'loaf',
-        description: `no legs, all bread, don't care`
+    let longBoi = {
+        name: 'long boi',
+        description: `got stretched`
     };
 
     before(() => {
@@ -58,28 +60,28 @@ describe('breeds', () => {
     it('gets all pets', () => {
         return chai.request(app)
             .post('/breeds')
-            .send(garfield)
+            .send(longBoi)
             .then(({ body }) => {
-                garfield = body;
+                longBoi = body;
                 return chai.request(app)
-                    .get('/pets');
+                    .get('/breeds');
             })
             .then(({ body }) => {
-                assert.deepEqual(body, [duchess, garfield]);
+                assert.deepEqual(body, [loaf, longBoi]);
             });
     });
 
-    // it('removes a pet', () => {
-    //     return chai.request(app)
-    //         .del(`/pets/${garfield.id}`)
-    //         .then(() => {
-    //             return chai.request(app)
-    //                 .get('/pets');
-    //         })
-    //         .then(({ body }) => {
-    //             assert.deepEqual(body, [duchess]);
-    //         });
-    // });
+    it('removes a pet', () => {
+        return chai.request(app)
+            .del(`/breeds/${longBoi.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/breeds');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [loaf]);
+            });
+    });
 
     after(() => {
         client.end();
