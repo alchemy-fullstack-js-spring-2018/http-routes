@@ -1,26 +1,14 @@
 const client = require('../lib/db-client');
 
-const bands = [
-    {
-        name: 'Preoccupations',
-        city: 'Calgary'
-    },
-    {
-        name: 'Shame',
-        city: 'London'
-    },
-    {
-        name: 'Ought',
-        city: 'Montreal'
-    }
-];
+const bands = ['Preoccupations', 'Shame', 'Ought'];
 
-const bandPromises = bands.map((name, city) => {
+
+const bandPromises = bands.map(band => {
     return client.query(`
-        INSERT INTO bands(name,city)
-        VALUES($1,$2)
+        INSERT INTO bands(name)
+        VALUES($1)
         ON CONFLICT DO NOTHING;
-    `, [name, city]);
+    `, [band]);
 });
 
 Promise.all(bandPromises)
