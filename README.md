@@ -1,4 +1,4 @@
-# Http-Routes
+# HTTP-Routes
 
 **Author**: Henrique Oliveira
 **Version**: 1.0.0
