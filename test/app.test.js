@@ -68,7 +68,7 @@ describe('books', () => {
                     .get('/books');
             })
             .then(({ body }) => {
-                assert.deepEqual(body, [misery, deadZone])
+                assert.deepEqual(body, [misery, deadZone]);
             });
     });
     
