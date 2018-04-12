@@ -16,7 +16,7 @@
     "start": "node server.js",
     "start:watch": "nodemon server.js",
     "db:create": "node db/db-create.js",
-    "db:load": "node db/load-db.js",
+    "db:load": "node db/db-load.js",
     "db:drop": "node db/drop-tables",
     "db:all": "npm run db:drop && npm run db:create && npm run db:load"
   },
