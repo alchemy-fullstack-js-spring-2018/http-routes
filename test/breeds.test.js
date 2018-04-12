@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './test/.env.test' });
+require('dotenv').config({ path: './test/.env' });
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const client = require('../lib/db-client');
@@ -8,60 +8,56 @@ const { assert } = chai;
 chai.use(chaiHttp);
 
 
-describe('pets', () => {
+describe('breeds', () => {
 
-    before(() => client.query('DELETE FROM pets'));
+    before(() => client.query(`
+        DELETE FROM breeds WHERE name='loaf'; `));
 
-    let garfield = {
-        name: 'garfield',
-        category_id: 1
+    let loaf = {
+        name: 'loaf',
+        description: `no legs, all bread, don't care`
     };
-
-    let duchess = {
-        name: 'Duchess',
-        category_id: 1,
-        color: 'white',
-        description: 'star from Aristocats'
+    let loaf = {
+        name: 'loaf',
+        description: `no legs, all bread, don't care`
     };
 
     before(() => {
         return chai.request(app)
-            .post('/pets')
-            .send(duchess)
+            .post('/breeds')
+            .send(loaf)
             .then(({ body }) => {
-                assert.equal(body.name, duchess.name);
-                assert.equal(body.category_id, duchess.category_id);
-                assert.equal(body.color, duchess.color);
-                assert.equal(body.description, duchess.description);
-                duchess = body;
-            });       
+                assert.equal(body.name, loaf.name);
+                assert.equal(body.description, loaf.description);
+                loaf = body;
+            });
     });
 
     it('saves a pet', () => {
-        assert.ok(duchess.id);
+        assert.ok(loaf.id);
     });
 
     it('gets a pet by id', () => {
         return chai.request(app)
-            .get(`/pets/${duchess.id}`)
+            .get(`/breeds/${loaf.name}`)
             .then(({ body }) => {
-                assert.deepEqual(body, duchess);
+                assert.deepEqual(body, loaf);
             });
     });
 
     it('update a pet', () => {
-        duchess.color = 'ivory';
+        loaf.description = 'your mom';
         return chai.request(app)
-            .put(`/pets/${duchess.id}`)
-            .send(duchess)
+            .put(`/breeds/${loaf.id}`)
+            .send(loaf)
             .then(({ body }) => {
-                assert.deepEqual(body, duchess);
+                assert.deepEqual(body, loaf);
             });
     });
 
     it('gets all pets', () => {
         return chai.request(app)
-            .post('/pets')
+            .post('/breeds')
             .send(garfield)
             .then(({ body }) => {
                 garfield = body;
@@ -73,17 +69,17 @@ describe('pets', () => {
             });
     });
 
-    it('removes a pet', () => {
-        return chai.request(app)
-            .del(`/pets/${garfield.id}`)
-            .then(() => {
-                return chai.request(app)
-                    .get('/pets');
-            })
-            .then(({ body }) => {
-                assert.deepEqual(body, [duchess]);
-            });
-    });
+    // it('removes a pet', () => {
+    //     return chai.request(app)
+    //         .del(`/pets/${garfield.id}`)
+    //         .then(() => {
+    //             return chai.request(app)
+    //                 .get('/pets');
+    //         })
+    //         .then(({ body }) => {
+    //             assert.deepEqual(body, [duchess]);
+    //         });
+    // });
 
     after(() => {
         client.end();

@@ -2,15 +2,16 @@
   "name": "http-routes",
   "version": "1.0.0",
   "description": "## Overview A brief description of the project",
-  "main": "index.js",
+  "main": "server.js",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "test": "test"
   },
   "scripts": {
     "db:create": "node db/create-db.js",
     "db:delete": "node db/drop-tables.js",
     "db:load": "node db/load-db.js",
-    "db:reload" : "npm run db:delete && npm run db:create && npm run db:load",
+    "db:reload": "npm run db:delete && npm run db:create && npm run db:load",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "mocha": "mocha",
