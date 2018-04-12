@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - "8"
 services:
-  -postgresql
+  - postgresql
 before_script:
-  -psql -c 'create database travic_ci_test;' -U postgres
+  - psql -c 'create database name_of_database;' -U postgres
+before_script:
+  - npm run db:all
