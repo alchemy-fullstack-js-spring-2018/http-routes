@@ -63,6 +63,32 @@ describe('pokemans', () => {
             });
     });
 
+    it('gets all pokemon', () => {
+        return chai.request(app)
+            .post('/pokemons')
+            .send(char)
+            .then(({ body }) => {
+                char = body;
+                return chai.request(app)
+                    .get('/pokemons');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [bulb, char]);
+            });
+    });
+
+    it('deletes a pokemon', () => {
+        return chai.request(app)
+            .del(`/pokemons/${char.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('pokemons');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, bulb);
+            });
+    });
+
     after(() => {
         client.end();
     });
