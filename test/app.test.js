@@ -27,6 +27,8 @@ describe('birds', () => {
         colors: ['black']
     };
 
+    let updatedHummer;
+
     before(() => {
         return chai.request(app)
             .post('/birds')
@@ -36,11 +38,11 @@ describe('birds', () => {
             });
     });
 
-    it('saves a bird', () => {
+    it('saves a bird (POST)', () => {
         assert.ok(hummingbird.id);
     });
 
-    it('gets all birds', () => {
+    it('gets all birds (GET)', () => {
         return chai.request(app)
             .post('/birds')
             .send(crow)
@@ -54,7 +56,7 @@ describe('birds', () => {
             });
     });
 
-    it('gets a bird by id', () => {
+    it('gets a bird by id (GET)', () => {
         return chai.request(app)
             .get(`/birds/${crow.id}`)
             .then(({ body }) => {
@@ -62,8 +64,8 @@ describe('birds', () => {
             });
     });
 
-    it('updates a bird', () => {
-        const updatedHummer = Object.assign({}, hummingbird);
+    it('updates a bird (PUT)', () => {
+        updatedHummer = Object.assign({}, hummingbird);
         updatedHummer.colors = ['green', 'gray', 'magenta'];
         return chai.request(app)
             .put(`/birds/${hummingbird.id}`)
@@ -74,7 +76,19 @@ describe('birds', () => {
                     .get('/birds');  
             })
             .then(({ body }) => {
-                assert.deepEqual(body, [crow, updatedHummer]);
+                assert.deepEqual(body, [updatedHummer, crow]);
+            });
+    });
+
+    it('removes a bird (DELETE)', () => {
+        return chai.request(app)
+            .del(`/birds/${crow.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/birds');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [updatedHummer]);
             });
     });
 
