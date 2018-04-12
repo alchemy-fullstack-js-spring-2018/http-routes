@@ -41,4 +41,14 @@ describe('Friends Tests', () => {
                 assert.deepEqual(body, austin);
             });
     });
+
+    it('Updates a friend', () => {
+        austin.role = 'Better than Jesus';
+        return chai.request(app)
+            .put(`/friends/${austin.id}`)
+            .send(austin)
+            .then(({ body }) => {
+                assert.deepEqual(body, austin);
+            });
+    });
 });
