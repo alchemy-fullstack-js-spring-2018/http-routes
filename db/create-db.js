@@ -8,5 +8,5 @@ client.query(`
         pokedex_number INTEGER NOT NULL
     );
 `)
-    .then(() => console.log('db task successful'), err => console.error(err))
+    .then(() => console.log('db task successful'), err => console.error(err)) //eslint-disable-line
     .then(() => client.end());

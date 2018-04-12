@@ -2,8 +2,10 @@
     "cSpell.words": [
         "Bulbasaur",
         "Charmander",
+        "VARCHAR",
         "pokedex",
         "pokemans",
-        "pokemons"
+        "pokemons",
+        "postgres"
     ]
 }
