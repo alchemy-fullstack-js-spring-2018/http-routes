@@ -48,6 +48,16 @@ describe('books', () => {
             });
     });
 
+    it('updates book', () => {
+        misery.author = 'King';
+        return chai.request(app)
+            .put(`/books/${misery.id}`)
+            .send(misery)
+            .then(({ body }) => {
+                assert.deepEqual(body, misery);
+            });
+    });
+
 
 
 
