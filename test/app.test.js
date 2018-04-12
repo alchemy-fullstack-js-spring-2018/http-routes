@@ -33,4 +33,12 @@ describe('Friends Tests', () => {
     it('Saves a friend', () => {
         assert.ok(austin.id);
     });
+
+    it('Retrieve friend by id', () => {
+        return chai.request(app)
+            .get(`/friends/${austin.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, austin);
+            });
+    });
 });
