@@ -17,13 +17,31 @@ describe('E2E', () => {
         singer: 'Natasha Khan'
     };
 
-    it('test', () => {
+    let testBand2 = {
+        name: 'Testy and the Tests',
+        genre: 'Test Rock',
+        singer: 'Tessa Tester'
+    };
+
+    before(() => {
         return chai.request(app)
             .post('/bands')
             .send(testBand)
             .then(({ body }) => {
-                assert.equal(body.name, testBand.genre);
+                assert.equal(body.name, testBand.name);
+                assert.equal(body.genre, testBand.genre);
+                assert.equal(body.singer, testBand.singer);
+                testBand = body;
             });       
+    });
+
+    it('gets single band by id', () => {
+        return chai.request(app)
+            .get(`/bands/${testBand.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, testBand2);
+            });
+
     });
 
     after(() => {
