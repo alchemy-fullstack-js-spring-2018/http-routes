@@ -34,8 +34,21 @@ describe('Invertebrates', () => {
             });
     });
 
-    it('saves a pet', () => {
+    it('saves an invertebrate', () => {
         assert.ok(pycnogonid.id);
     });
 
+    it('saves an additional invertebrate, returns all upon req', () => {
+        return chai.request(app)
+            .post('/invertebrates')
+            .send(pseudoscorpion)
+            .then(({ body }) => {
+                pseudoscorpion = body;
+                return chai.request(app)
+                    .get('/invertebrates');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [pycnogonid, pseudoscorpion]);
+            });
+    });
 });
