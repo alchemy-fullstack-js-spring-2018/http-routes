@@ -30,4 +30,7 @@ describe('Friends Tests', () => {
             });
     });
 
+    it('Saves a friend', () => {
+        assert.ok(austin.id);
+    });
 });
