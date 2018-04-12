@@ -50,6 +50,22 @@ describe('blazers', () => {
             });
     });
 
+    it('adds play then updates player', () => {
+        return chai.request(app)
+            .post('/blazers')
+            .send(mccollum)
+            .then(({ body }) => {
+                mccollum = body;
+                mccollum.position = 'Shooting Guard';
+                return chai.request(app)
+                    .put(`/blazers/${mccollum.id}`)
+                    .send(mccollum)
+                    .then(({ body }) => {
+                        assert.deepEqual(body, mccollum);
+                    });
+            });
+    });
+
     after(() => {
         client.end();
     });
