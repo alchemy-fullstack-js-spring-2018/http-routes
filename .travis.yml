@@ -4,5 +4,5 @@ node_js:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database animals;' -U postgres
-  - npm run db:all
+  - psql -c 'create database animals_test;' -U postgres
+  - npm run db:create
