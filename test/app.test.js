@@ -59,7 +59,19 @@ describe('blazers', () => {
                 assert.deepEqual(body, lillard);
             });
     });
-
+    it('gets all players', () => {
+        return chai.request(app)
+            .post('/blazers')
+            .send(mccollum)
+            .then(({ body }) => {
+                mccollum = body;
+                return chai.request(app)
+                    .get('/blazers');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [lillard, mccollum]);
+            });
+    });
     after(() => {
         client.end();
     });
