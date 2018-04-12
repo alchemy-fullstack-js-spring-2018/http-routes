@@ -17,6 +17,13 @@ describe('blazers', () => {
         position: 'Point Guard'
     };
 
+    let mccollum = {
+        name: 'CJ McCollum',
+        category_id: 2,
+        school: 'Lehigh University',
+        position: 'Point Guard'
+    };
+
     before(() => {
         return chai.request(app)
             .post('/blazers')
@@ -31,6 +38,20 @@ describe('blazers', () => {
     });
 
     it('saves a player', () => {
+        console.log('lillard id', lillard.id);
         assert.ok(lillard.id);
     });
+
+    it('gets a player by id', () => {
+        return chai.request(app)
+            .get(`/blazers/${lillard.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, lillard);
+            });
+    });
+
+    after(() => {
+        client.end();
+    });
+
 });
