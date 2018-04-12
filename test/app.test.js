@@ -57,8 +57,10 @@ describe('podcasts', () => {
     });
 
     it('update podcast by id', () => {
+        pod.category = 'The best';
         return chai.request(app)
             .put(`/podcasts/${pod.id}`)
+            .send(pod)
             .then(({ body }) => {
                 assert.deepEqual(body, pod);
             });
