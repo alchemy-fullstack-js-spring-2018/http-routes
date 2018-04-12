@@ -47,7 +47,7 @@ describe('doggos', () => {
             });
     });
 
-    it('update a pet', () => {
+    it.skip('update a pet', () => {
         latte.description = 'we miss latte';
         return chai.request(app)
             .put(`/doggos/${latte.id}`)
@@ -57,31 +57,31 @@ describe('doggos', () => {
             });
     });
 
-    // it('gets all pets', () => {
-    //     return chai.request(app)
-    //         .post('/pets')
-    //         .send(garfield)
-    //         .then(({ body }) => {
-    //             garfield = body;
-    //             return chai.request(app)
-    //                 .get('/pets');
-    //         })
-    //         .then(({ body }) => {
-    //             assert.deepEqual(body, [duchess, garfield]);
-    //         });
-    // });
+    it('gets all pets', () => {
+        return chai.request(app)
+            .post('/doggos')
+            .send(bubdow)
+            .then(({ body }) => {
+                bubdow = body;
+                return chai.request(app)
+                    .get('/doggos');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [latte, bubdow]);
+            });
+    });
 
-    // it('removes a pet', () => {
-    //     return chai.request(app)
-    //         .del(`/pets/${garfield.id}`)
-    //         .then(() => {
-    //             return chai.request(app)
-    //                 .get('/pets');
-    //         })
-    //         .then(({ body }) => {
-    //             assert.deepEqual(body, [duchess]);
-    //         });
-    // });
+    it('removes a pet', () => {
+        return chai.request(app)
+            .del(`/doggos/${bubdow.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/doggos');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [latte]);
+            });
+    });
 
     after(() => {
         client.end();
