@@ -54,6 +54,14 @@ describe('birds', () => {
             });
     });
 
+    it('gets a bird by id', () => {
+        return chai.request(app)
+            .get(`/birds/${crow.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, crow);
+            });
+    });
+
     after(() => {
         client.end();
     });
