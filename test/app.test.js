@@ -9,7 +9,25 @@ chai.use(chaiHttp);
 
 describe('podcasts', () => {
 
-    const allPods = [{ name:'The Read', host: 'Kid Fury & Crissle', category:'Comedy' }, { name: 'She Explores', host: 'Gale Straub', category: 'Outdoor' }, { name: 'Welcome to Night Vale', host: 'Cecil Plamer', category: 'Comedy' }];
+    const allPods = [
+        { 
+            name:'The Read', 
+            host: 'Kid Fury & Crissle', 
+            category:'Comedy' 
+        }, 
+        { 
+            name: 'She Explores', 
+            host: 'Gale Straub', 
+            category: 'Outdoor' 
+        }, 
+        { 
+            name: 'Welcome to Night Vale', 
+            host: 'Cecil Plamer', 
+            category: 'Comedy' 
+        }
+    ];
+
+    before(() => client.query('DELETE FROM podcasts;'));
 
     it('configured env', () => {
         assert.equal(process.env.DATABASE_URL,
@@ -21,7 +39,7 @@ describe('podcasts', () => {
         return chai.request(app)
             .get('/podcasts')
             .then(({ body }) => {
-                assert.ok(body);
+                assert.deepEqual(body, []);
             });
     });
 
