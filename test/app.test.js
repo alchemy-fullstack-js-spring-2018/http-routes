@@ -23,12 +23,6 @@ describe('pokemans', () => {
         pokedex_number: 4
     };
 
-    let squirt = {
-        name: 'Squirtle',
-        type: 'Water',
-        pokedex_number: 7
-    };
-
     before(() => {
         return chai.request(app)
             .post('/pokemons')
@@ -82,10 +76,10 @@ describe('pokemans', () => {
             .del(`/pokemons/${char.id}`)
             .then(() => {
                 return chai.request(app)
-                    .get('pokemons');
+                    .get('/pokemons');
             })
             .then(({ body }) => {
-                assert.deepEqual(body, bulb);
+                assert.deepEqual(body, [bulb]);
             });
     });
 
