@@ -16,7 +16,7 @@ describe('birds', () => {
         scientificName: 'Calypte anna',
         wingspan: '12 cm',
         diet: 'nectar',
-        colors: ['green', 'gray', 'magenta']
+        colors: ['green', 'gray', 'red']
     };
 
     let crow = {
@@ -38,6 +38,20 @@ describe('birds', () => {
 
     it('saves a bird', () => {
         assert.ok(hummingbird.id);
+    });
+
+    it('gets all birds', () => {
+        return chai.request(app)
+            .post('/birds')
+            .send(crow)
+            .then(({ body }) => {
+                crow = body;
+                return chai.request(app)
+                    .get('/birds');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [hummingbird, crow]);
+            });
     });
 
     after(() => {
