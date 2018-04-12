@@ -7,7 +7,6 @@ const bandPromises = bands.map(band => {
     return client.query(`
         INSERT INTO bands(name)
         VALUES($1)
-        ON CONFLICT DO NOTHING;
     `, [band]);
 });
 
