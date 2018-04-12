@@ -14,10 +14,10 @@ describe('Friends Tests', () => {
         role: 'Literally everything good about us.'
     };
 
-    // let kasey = {
-    //     name: 'Kasey',
-    //     role: 'Setting a low bar for the rest of us.'
-    // };
+    let kasey = {
+        name: 'Kasey',
+        role: 'Setting a low bar for the rest of us.'
+    };
 
     before(() => {
         return chai.request(app)
@@ -49,6 +49,20 @@ describe('Friends Tests', () => {
             .send(austin)
             .then(({ body }) => {
                 assert.deepEqual(body, austin);
+            });
+    });
+
+    it('Retrieves all friends', () => {
+        return chai.request(app)
+            .post(`/friends`)
+            .send(kasey)
+            .then(({ body }) => {
+                kasey = body;
+                return chai.request(app)
+                    .get('/friends');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [austin, kasey]);
             });
     });
 });
