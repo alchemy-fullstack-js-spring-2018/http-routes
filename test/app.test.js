@@ -40,6 +40,15 @@ describe('books', () => {
         assert.ok(misery.id);
     });
 
+    it('book by id', () => {
+        return chai.request(app)
+            .get(`/books/${misery.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, misery);
+            });
+    });
+
+
 
 
 });

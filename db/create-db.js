@@ -1,3 +1,4 @@
+/* eslint no-console: off */
 const client = require('../lib/db-client');
 
 client.query(`
