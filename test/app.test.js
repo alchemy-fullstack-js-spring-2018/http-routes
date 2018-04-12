@@ -62,6 +62,22 @@ describe('birds', () => {
             });
     });
 
+    it('updates a bird', () => {
+        const updatedHummer = Object.assign({}, hummingbird);
+        updatedHummer.colors = ['green', 'gray', 'magenta'];
+        return chai.request(app)
+            .put(`/birds/${hummingbird.id}`)
+            .send(updatedHummer)
+            .then(({ body }) => {
+                assert.deepEqual(body, updatedHummer);
+                return chai.request(app)
+                    .get('/birds');  
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [crow, updatedHummer]);
+            });
+    });
+
     after(() => {
         client.end();
     });
