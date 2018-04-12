@@ -51,4 +51,24 @@ describe('Invertebrates', () => {
                 assert.deepEqual(body, [pycnogonid, pseudoscorpion]);
             });
     });
+
+    it('gets an invert by id', () => {
+        return chai.request(app)
+            .get(`/invertebrates/${pycnogonid.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, pycnogonid);
+            });
+    });
+
+    it('removes an invertebrate', () => {
+        return chai.request(app)
+            .del(`/invertebrates/${pseudoscorpion.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/invertebrates');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [pycnogonid]);
+            });
+    });
 });
