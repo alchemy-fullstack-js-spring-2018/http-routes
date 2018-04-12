@@ -44,9 +44,16 @@ describe('podcasts', () => {
             });
     });
 
-
     it('posts a podcast', () => {
         assert.ok(pod.id);
+    });
+
+    it('get a podcast by id', () => {
+        return chai.request(app)
+            .get(`/podcasts/${pod.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, pod);
+            });
     });
 
     after(() => {
