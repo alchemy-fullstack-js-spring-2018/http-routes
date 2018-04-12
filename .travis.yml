@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "8"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database books;' -U postgres
+  - npm run db:create
+
+  
