@@ -3,9 +3,8 @@
 const client = require('../lib/db-client');
 
 client.query(`
-DROP TABLE IF EXISTS /* first table */,
-DROP TABLE IF EXISTS /* second table */,
-;
+    DROP TABLE IF EXISTS doggos;
+    DROP TABLE IF EXISTS breeds;
 `)
     .then(
         () => console.log('All tables successfully removed'),

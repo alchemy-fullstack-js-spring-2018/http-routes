@@ -1,16 +1,16 @@
 {
-  "name": "git-template",
+  "name": "http-routes",
   "version": "1.0.0",
   "description": "## Overview A brief description of the project",
   "main": "index.js",
   "directories": {
-    "lib": "lib",
-    "test": "test"
+    "lib": "lib"
   },
   "scripts": {
-    "db:create": "node create-db.js",
-    "db:delete": "node drop-tables.js",
-    "db:load": "node load-db.js",
+    "db:create": "node db/create-db.js",
+    "db:delete": "node db/drop-tables.js",
+    "db:load": "node db/load-db.js",
+    "db:reload" : "npm run db:delete && npm run db:create && npm run db:load",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "mocha": "mocha",
@@ -28,5 +28,16 @@
   "bugs": {
     "url": "https://github.com/jklipton/git-template/issues"
   },
-  "homepage": "https://github.com/jklipton/git-template#readme"
+  "homepage": "https://github.com/jklipton/git-template#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^4.19.1",
+    "mocha": "^5.0.5",
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "pg": "^7.4.1"
+  }
 }

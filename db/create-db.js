@@ -3,11 +3,24 @@
 const client = require('../lib/db-client');
 
 client.query(`
-    CREATE TABLE IF NOT EXISTS /* table name */(
-        /* column name */ /* data type */ NOT NULL,
-        /* second column name */ /* data type */ NOT NULL
+    CREATE TABLE IF NOT EXISTS breeds(
+        ID SERIAL PRIMARY KEY NOT NULL,
+        NAME varchar(20) UNIQUE NOT NULL,
+        DESCRIPTION varchar(160) NOT NULL
     )
 `).then(
-    () => console.log('Table successfully created'),
+    () => console.log('Table 1 successfully created'),
+    err => console.error(err)
+);
+
+client.query(`
+    CREATE TABLE IF NOT EXISTS doggos(
+    ID SERIAL PRIMARY KEY NOT NULL,
+    NAME varchar(15) UNIQUE NOT NULL,
+    BREED varchar(10) REFERENCES breeds(name),
+    SKILL varchar(100) NOT NULL
+    )
+`).then(
+    () => console.log('Table 2 successfully created'),
     err => console.error(err)
 ).then(() => client.end());
