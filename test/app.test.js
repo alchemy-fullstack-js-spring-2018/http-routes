@@ -75,8 +75,8 @@ describe('blazers', () => {
     it('deletes players', () => {
         return chai.request(app)
             .del(`/blazers/${mccollum.id}`)
-            .then(({ body }) => {
-                return chai.reqeuest(app)
+            .then(() => {
+                return chai.request(app)
                     .get('/blazers');
             })
             .then(({ body }) => {
