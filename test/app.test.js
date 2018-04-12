@@ -58,7 +58,19 @@ describe('books', () => {
             });
     });
 
-
-
+    it('gets all pets', () => {
+        return chai.request(app)
+            .post('/books')
+            .send(deadZone)
+            .then(({ body }) => {
+                deadZone = body;
+                return chai.request(app)
+                    .get('/books');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [misery, deadZone])
+            });
+    });
+    
 
 });
