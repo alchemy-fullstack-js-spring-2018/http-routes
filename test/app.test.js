@@ -72,6 +72,17 @@ describe('blazers', () => {
                 assert.deepEqual(body, [lillard, mccollum]);
             });
     });
+    it('deletes players', () => {
+        return chai.request(app)
+            .del(`/blazers/${mccollum.id}`)
+            .then(({ body }) => {
+                return chai.reqeuest(app)
+                    .get('/blazers');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [lillard]);
+            });     
+    });
     after(() => {
         client.end();
     });
