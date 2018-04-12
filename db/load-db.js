@@ -8,7 +8,7 @@ const categoryPromises = categories.map(category => {
     return client.query(
         `INSERT INTO categories(name) 
         VALUES($1)
-        ON CONFLICT DO NOTHING;`,
+        `,
         [category]
     );
 });
