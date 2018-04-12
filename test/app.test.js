@@ -56,6 +56,14 @@ describe('podcasts', () => {
             });
     });
 
+    it('update podcast by id', () => {
+        return chai.request(app)
+            .put(`/podcasts/${pod.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, pod);
+            });
+    });
+
     after(() => {
         client.end();
     });
