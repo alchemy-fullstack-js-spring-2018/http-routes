@@ -7,4 +7,5 @@ In which I practiced creating an HTTP server that exposes a REST API for a resou
 Keli Hansen, with the support of Alchemy Code Lab
 
 ## How it works
+Currently easiest to use in Postman.
 
