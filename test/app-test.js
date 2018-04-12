@@ -12,9 +12,9 @@ describe('E2E', () => {
     before(() => client.query('DELETE FROM bands'));
 
     let testBand = {
-        name: 'Bat For Lashes',
-        genre: 'Dreampop',
-        singer: 'Natasha Khan'
+        name: 'Testy-Os',
+        genre: 'Test Pop',
+        singer: 'La\'Testa Test'
     };
 
     let testBand2 = {
@@ -39,13 +39,36 @@ describe('E2E', () => {
         return chai.request(app)
             .get(`/bands/${testBand.id}`)
             .then(({ body }) => {
-                assert.deepEqual(body, testBand2);
+                assert.deepEqual(body, testBand);
             });
-
     });
 
+    it('gets all bands', () => {
+        return chai.request(app)
+            .post('/bands')
+            .send(testBand2)
+            .then(({ body }) => {
+                testBand2 = body;
+                return chai.request(app)
+                    .get('/bands');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [testBand, testBand2]);
+            });
+            
+    });
+
+    it('update a band', () => {
+        testBand2.singer = 'Terra Tester';
+        return chai.request(app)
+            .put(`/bands/${testBand2.id}`)
+            .send(testBand2)
+            .then(({ body }) => {
+                assert.deepEqual(body, testBand);
+            });
+    });
+        
     after(() => {
         client.end();
     });
-
 });
