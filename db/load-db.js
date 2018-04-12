@@ -2,18 +2,18 @@
 
 const client = require('../lib/db-client');
 
-const categories = ['marine', 'terrestrial'];
+const habitats = ['marine', 'terrestrial'];
 
-const categoryPromises = categories.map(category => {
+const habitatPromises = habitats.map(habitat => {
     return client.query(
         `INSERT INTO habitat(name) 
         VALUES($1)
         ON CONFLICT DO NOTHING;`,
-        [category]
+        [habitat]
     );
 });
 
-Promise.all(categoryPromises)
+Promise.all(habitatPromises)
     .then(() => {
         return client.query(
             `SELECT * FROM habitat`

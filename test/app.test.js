@@ -71,4 +71,8 @@ describe('Invertebrates', () => {
                 assert.deepEqual(body, [pycnogonid]);
             });
     });
+
+    after(() => {
+        client.end();
+    });
 });
