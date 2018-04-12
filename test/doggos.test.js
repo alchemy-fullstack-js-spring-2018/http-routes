@@ -1,91 +1,89 @@
-// require('dotenv').config({ path: './test/.env.test' });
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
-// const client = require('../lib/db-client');
-// const app = require('../lib/app');
+require('dotenv').config({ path: './test/.env' });
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const client = require('../lib/db-client');
+const app = require('../lib/app');
 
-// const { assert } = chai;
-// chai.use(chaiHttp);
+const { assert } = chai;
+chai.use(chaiHttp);
 
 
-// describe('pets', () => {
+describe('doggos', () => {
 
-//     before(() => client.query('DELETE FROM pets'));
+    before(() => client.query(`DELETE FROM doggos;`));
 
-//     let garfield = {
-//         name: 'garfield',
-//         category_id: 1
-//     };
+    let latte = {
+        name: 'latte',
+        breed: 'smoosh',
+        skill: 'sitting like a hooman'
+    };
 
-//     let duchess = {
-//         name: 'Duchess',
-//         category_id: 1,
-//         color: 'white',
-//         description: 'star from Aristocats'
-//     };
+    let bubdow = {
+        name: 'bubdow',
+        breed: 'pibble',
+        skill: 'being a punk'
+    };
 
-//     before(() => {
-//         return chai.request(app)
-//             .post('/pets')
-//             .send(duchess)
-//             .then(({ body }) => {
-//                 assert.equal(body.name, duchess.name);
-//                 assert.equal(body.category_id, duchess.category_id);
-//                 assert.equal(body.color, duchess.color);
-//                 assert.equal(body.description, duchess.description);
-//                 duchess = body;
-//             });       
-//     });
+    before(() => {
+        return chai.request(app)
+            .post('/doggos')
+            .send(latte)
+            .then(({ body }) => {
+                assert.equal(body.name, latte.name);
+                assert.equal(body.skill, latte.skill);
+                latte = body;
+            });
+    });
 
-//     it('saves a pet', () => {
-//         assert.ok(duchess.id);
-//     });
+    it('saves a pet', () => {
+        assert.ok(latte.id);
+    });
 
-//     it('gets a pet by id', () => {
-//         return chai.request(app)
-//             .get(`/pets/${duchess.id}`)
-//             .then(({ body }) => {
-//                 assert.deepEqual(body, duchess);
-//             });
-//     });
+    it('gets a pet by id', () => {
+        return chai.request(app)
+            .get(`/doggos/${latte.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, latte);
+            });
+    });
 
-//     it('update a pet', () => {
-//         duchess.color = 'ivory';
-//         return chai.request(app)
-//             .put(`/pets/${duchess.id}`)
-//             .send(duchess)
-//             .then(({ body }) => {
-//                 assert.deepEqual(body, duchess);
-//             });
-//     });
+    it('update a pet', () => {
+        latte.description = 'we miss latte';
+        return chai.request(app)
+            .put(`/doggos/${latte.id}`)
+            .send(latte)
+            .then(({ body }) => {
+                assert.deepEqual(body, latte);
+            });
+    });
 
-//     it('gets all pets', () => {
-//         return chai.request(app)
-//             .post('/pets')
-//             .send(garfield)
-//             .then(({ body }) => {
-//                 garfield = body;
-//                 return chai.request(app)
-//                     .get('/pets');
-//             })
-//             .then(({ body }) => {
-//                 assert.deepEqual(body, [duchess, garfield]);
-//             });
-//     });
+    // it('gets all pets', () => {
+    //     return chai.request(app)
+    //         .post('/pets')
+    //         .send(garfield)
+    //         .then(({ body }) => {
+    //             garfield = body;
+    //             return chai.request(app)
+    //                 .get('/pets');
+    //         })
+    //         .then(({ body }) => {
+    //             assert.deepEqual(body, [duchess, garfield]);
+    //         });
+    // });
 
-//     it('removes a pet', () => {
-//         return chai.request(app)
-//             .del(`/pets/${garfield.id}`)
-//             .then(() => {
-//                 return chai.request(app)
-//                     .get('/pets');
-//             })
-//             .then(({ body }) => {
-//                 assert.deepEqual(body, [duchess]);
-//             });
-//     });
+    // it('removes a pet', () => {
+    //     return chai.request(app)
+    //         .del(`/pets/${garfield.id}`)
+    //         .then(() => {
+    //             return chai.request(app)
+    //                 .get('/pets');
+    //         })
+    //         .then(({ body }) => {
+    //             assert.deepEqual(body, [duchess]);
+    //         });
+    // });
 
-//     after(() => {
-//         client.end();
-//     });
-// });
+    after(() => {
+        client.end();
+    });
+});

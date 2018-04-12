@@ -19,10 +19,10 @@ Promise.all(breeds.map(breed => {
 Promise.all(doggos.map(doggo => {
     return client.query(
         `
-        INSERT INTO doggos(name, breed, skill)
-        VALUES ($1, $2, $3);
+        INSERT INTO doggos(name, skill, breed_id)
+        VALUES ($1, $2, (SELECT id from breeds WHERE name=$3 ));
             `,
-        [doggo.name, doggo.breed, doggo.skill]
+        [doggo.name, doggo.skill, doggo.breed]
     );
 }))
     .then(

@@ -9,7 +9,7 @@ client.query(`
         DESCRIPTION varchar(160) NOT NULL
     )
 `).then(
-    () => console.log('Table 1 successfully created'),
+    () => console.log('Breeds successfully created'),
     err => console.error(err)
 );
 
@@ -17,10 +17,10 @@ client.query(`
     CREATE TABLE IF NOT EXISTS doggos(
     ID SERIAL PRIMARY KEY NOT NULL,
     NAME varchar(15) UNIQUE NOT NULL,
-    BREED varchar(10) REFERENCES breeds(name),
+    BREED_ID int REFERENCES breeds(ID),
     SKILL varchar(100) NOT NULL
     )
 `).then(
-    () => console.log('Table 2 successfully created'),
+    () => console.log('Doggos successfully created'),
     err => console.error(err)
 ).then(() => client.end());
