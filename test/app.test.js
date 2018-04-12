@@ -78,6 +78,14 @@ describe('Friends Tests', () => {
             });
     });
 
+    it('Handles bad requests with 404', () => {
+        return chai.request(app)
+            .get('/bad')
+            .then((res) => {
+                assert.equal(res.status, 404);
+            });
+    });
+
     after(() => {
         client.end();
     });
