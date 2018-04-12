@@ -65,4 +65,20 @@ describe('Friends Tests', () => {
                 assert.deepEqual(body, [austin, kasey]);
             });
     });
+
+    it('Deletes a friend', () => {
+        return chai.request(app)
+            .del(`/friends/${kasey.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/friends');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [austin]);
+            });
+    });
+
+    after(() => {
+        client.end();
+    });
 });
