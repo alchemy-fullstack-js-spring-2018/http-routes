@@ -18,6 +18,16 @@ describe('Bands', () => {
             });
     });
 
+    it('Gets one band', () => {
+        return chai.request(app)
+            .get('/bands/3')
+            .then(({ body }) => {
+                assert.deepEqual(body, { id: 3, name: 'Ought' });
+            });
+    });
+
+
+
     after(() => {
         client.end();
     });
