@@ -64,7 +64,19 @@ describe('E2E', () => {
             .put(`/bands/${testBand2.id}`)
             .send(testBand2)
             .then(({ body }) => {
-                assert.deepEqual(body, testBand);
+                assert.deepEqual(body, testBand2);
+            });
+    });
+
+    it('removes a band', () => {
+        return chai.request(app)
+            .del(`/bands/${testBand.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/bands');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [testBand2]);
             });
     });
         
