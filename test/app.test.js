@@ -56,6 +56,18 @@ describe('podcasts', () => {
             });
     });
 
+    it('delete podcast by id', () => {
+        return chai. request(app)
+            .del(`/podcasts/${pod.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/pets');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
+
     after(() => {
         client.end();
     });
