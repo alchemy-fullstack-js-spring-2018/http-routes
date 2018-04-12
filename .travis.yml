@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "8"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database name_of_database;' -U postgres
+before_script:
+  - npm run name_of_your_npm_script
