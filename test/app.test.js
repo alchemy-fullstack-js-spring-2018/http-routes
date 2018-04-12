@@ -8,6 +8,7 @@ const { assert } = chai;
 chai.use(chaiHttp);
 
 describe('blazers', () => {
+    
     before(() => client.query('DELETE FROM blazers'));
 
     let lillard = {
@@ -20,8 +21,8 @@ describe('blazers', () => {
     let mccollum = {
         name: 'CJ McCollum',
         category_id: 2,
-        school: 'Lehigh University',
-        position: 'Point Guard'
+        school: 'Lehigh',
+        position: 'Shooting Guard'
     };
 
     before(() => {
@@ -38,7 +39,6 @@ describe('blazers', () => {
     });
 
     it('saves a player', () => {
-        console.log('lillard id', lillard.id);
         assert.ok(lillard.id);
     });
 
@@ -50,19 +50,13 @@ describe('blazers', () => {
             });
     });
 
-    it('adds play then updates player', () => {
+    it('updates player', () => {
+        lillard.school = 'Weber State University';
         return chai.request(app)
-            .post('/blazers')
-            .send(mccollum)
+            .put(`/blazers/${lillard.id}`)
+            .send(lillard)
             .then(({ body }) => {
-                mccollum = body;
-                mccollum.position = 'Shooting Guard';
-                return chai.request(app)
-                    .put(`/blazers/${mccollum.id}`)
-                    .send(mccollum)
-                    .then(({ body }) => {
-                        assert.deepEqual(body, mccollum);
-                    });
+                assert.deepEqual(body, lillard);
             });
     });
 
