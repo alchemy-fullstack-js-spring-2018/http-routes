@@ -6,3 +6,4 @@ services:
 before_script:
   - psql -c 'create database animals;' -U postgres
   - npm run db:create
+  - npm run db:load
