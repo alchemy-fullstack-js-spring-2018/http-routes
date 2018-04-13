@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Breeds</h1>
+    <ul id="breeds"></ul>
+    <script>
+        fetch('/breeds')
+            .then(response => response.json())
+            .then(breeds => {
+                const ul = document.getElementById('breeds');
+                breeds.forEach(breed => {
+                    const li = document.createElement('li');
+                    li.innerText = `${breed.name} ${breed.description}`;
+                    ul.appendChild(li);
+                });
+            });
+    </script>
+
+    <h1>Doggos</h1>
+        <ul id="doggos"></ul>
+        <script>
+            fetch('/doggos')
+                .then(response => response.json())
+                .then(breeds => {
+                    const ul = document.getElementById('doggos');
+                    doggos.forEach(doggo => {
+                        const li = document.createElement('li');
+                        li.innerText = `${doggo.name}, ${doggo.breed}`;
+                        ul.appendChild(li);
+                        const li2 = document.createElement('li');
+                        li2.innerText = `skillz: ${doggo.skill}`;
+                        ul.appendChild(li2);
+                    });
+                });
+        </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+    "breeds": [{
+        "name": "bagel",
+		"description": "a very loud breakfast food. do not shmear."
+    },{
+        "name": "pibble",
+		"description": "the scariest of the house hippos"
+    },{
+        "name": "smoosh",
+		"description": "have noses afrighted of too much exposure, v modest"
+    },{
+        "name": "sheep police",
+		"description": "unemployed and very anxious in this economy"
+    },{
+        "name": "wee woo",
+		"description": "very alarming carpets"
+    }],
+    "doggos": [{
+        "name": "journey",
+        "breed": "pibble",
+        "skill": "borking, holding headbody up as well as dogbody"
+    },{
+        "name": "boondog",
+        "breed": "wee woo",
+		"skill": "whistling. champion of circles everywhere"
+    },{
+        "name": "louis",
+		"breed": "smoosh",
+		"skill": "why are you asking? what do you want? leave me alone"
+    }]
+}
