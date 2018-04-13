@@ -74,7 +74,7 @@ describe('podcasts', () => {
             category: 'Horror'
         };
 
-        return chai. request(app)
+        return chai.request(app)
             .post('/podcasts')
             .send(tanis)
             .then(({ body }) => {
@@ -89,7 +89,7 @@ describe('podcasts', () => {
                         assert.deepEqual(body, [pod]);
                     }); 
             });
-    }); 
+    });
 
     after(() => {
         client.end();
