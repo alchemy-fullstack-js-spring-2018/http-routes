@@ -5,6 +5,8 @@ client.query(`
     id SERIAL PRIMARY KEY,
     name VARCHAR(256) UNIQUE NOT NULL
   );
+  INSERT INTO habitat (name) VALUES (marine);
+  INSERT INTO habitat (name) VALUES (terrestrial);
   CREATE TABLE IF NOT EXISTS invertebrates(
     id SERIAL PRIMARY KEY,
     ord VARCHAR(256),
