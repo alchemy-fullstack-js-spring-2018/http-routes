@@ -4,5 +4,6 @@ node_js:
 services:
   - postgresql
 before_script:
-  - psql -c 'routes_test;' -U postgres
-  - npm run db:reload
+  - psql -c 'create database routes_test;' -U postgres
+  - npm run db:create
+  
