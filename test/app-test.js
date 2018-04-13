@@ -35,6 +35,12 @@ describe('E2E', () => {
             });       
     });
 
+    it('configured env', () => {
+        assert.equal(process.env.DATABASE_URL,
+            'postgres://postgres:33loki3s@localhost:5432/showlist_test'
+        );
+    });
+
     it('gets single band by id', () => {
         return chai.request(app)
             .get(`/bands/${testBand.id}`)
