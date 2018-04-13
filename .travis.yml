@@ -4,5 +4,5 @@ node_js:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database podcast;' -U postgres
+  - psql -c 'create database podcasts_test;' -U postgres
   - npm run db:all
