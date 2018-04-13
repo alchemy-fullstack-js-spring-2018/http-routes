@@ -36,14 +36,6 @@ describe('podcasts', () => {
         );
     });
 
-    it.skip('gets all podcasts', () => {
-        return chai.request(app)
-            .get('/podcasts')
-            .then(({ body }) => {
-                assert.deepEqual(body, []);
-            });
-    });
-
     it('posts a podcast', () => {
         assert.ok(pod.id);
     });
@@ -64,20 +56,40 @@ describe('podcasts', () => {
             .then(({ body }) => {
                 assert.deepEqual(body, pod);
             });
+    });       
+
+    it('gets all podcasts', () => {
+        return chai.request(app)
+            .get('/podcasts')
+            .then(({ body }) => {
+                assert.deepEqual(body, [pod]);
+            });
     });
 
+
     it('delete podcast by id', () => {
+        let tanis = {
+            name: 'Tanis',
+            host: 'Nic Silver',
+            category: 'Horror'
+        };
+
         return chai. request(app)
-            .del(`/podcasts/${pod.id}`)
-            .then(() => {
-                return chai.request(app)
-                    .get('/pets');
-            })
+            .post('/podcasts')
+            .send(tanis)
             .then(({ body }) => {
-                assert.deepEqual(body, []);
-            }); 
-    });        
-    
+                tanis = body;
+                return chai.request(app)
+                    .del(`/podcasts/${tanis.id}`)
+                    .then(() => {
+                        return chai.request(app)
+                            .get('/podcasts');
+                    })
+                    .then(({ body }) => {
+                        assert.deepEqual(body, [pod]);
+                    }); 
+            });
+    }); 
 
     after(() => {
         client.end();
