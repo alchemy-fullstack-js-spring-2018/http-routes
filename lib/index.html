@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Podcasts</title>
+</head>
+<body>
+    <ul id="podcasts"></ul>
+    <script>
+        fetch('/podcasts')
+            .then(respones => response.json())
+            .then(podcasts => {
+                const ul = document.getElementById('podcasts');
+                podcasts.forEach(podcast => {
+                    const li = document.createElement('li');
+                    li.innerText = `${podcast.name} is hosted by ${podcast.host}`;
+                    ul.appendChild(li);
+                });
+            })
+    </script>
+    
+</body>
+</html>
