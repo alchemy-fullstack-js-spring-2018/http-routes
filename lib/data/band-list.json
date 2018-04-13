@@ -1,0 +1,22 @@
+{
+    "bands":[
+    {    "name": "Bat for Lashes",
+        "genre": "Dreampop",
+        "singer": "Natasha Khan"
+    },
+    {
+        "name": "Godspeed You! Black Emperor",
+        "genre": "Experimental Rock",
+        "singer": "N/A"
+    },
+    {
+        "name": "Muse",
+        "genre": "Alt Rock",
+        "singer": "Matt Bellamy"
+    },
+    {
+        "name": "Grimes",
+        "genre": "Dreampop",
+        "singer": "Claire Boucher"
+    }]
+}
