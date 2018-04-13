@@ -3,7 +3,8 @@
 const client = require('../lib/db-client');
 
 client.query(`
-  DROP TABLE invertebrates;
+  DROP TABLE IF EXISTS invertebrates;
+  DROP TABLE IF EXISTS habitat;
 `)
     .then(
         () => console.log('successfully dropped table'),
