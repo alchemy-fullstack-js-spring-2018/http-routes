@@ -1,7 +1,7 @@
 {
   "name": "http-routes",
   "version": "1.0.0",
-  "description": "## Overview Playing around with HTTP route code.",
+  "description": "Playing around with HTTP route code.",
   "main": "index.js",
   "directories": {
     "lib": "lib",
