@@ -1,7 +1,17 @@
 'use strict';
 
-const client = require('../db/db-client');
-const rawData = require(/* raw data, json */);
+const client = require('../lib/db-client');
+const videogames = ['Armello', 'Night in the Woods', 'Undertale', 'Dragon Age'];
+
+const videogamePromises = videogames.map(category => {
+    return client.query(`
+        INSERT INTO  videogames(name, developer)
+        VALUES($1,$2)
+    `,
+    [category.name, category.developer]
+    );
+
+});
 
 Promise.all(books.map(book => {
     return client.query(

@@ -3,8 +3,7 @@
 const client = require('../lib/db-client');
 
 client.query(`
-DROP TABLE IF EXISTS /* first table */,
-DROP TABLE IF EXISTS /* second table */,
+DROP TABLE IF EXISTS videogames,
 ;
 `)
     .then(
