@@ -4,8 +4,7 @@
 const client = require('../lib/db-client');
 
 client.query(`
-DROP TABLE IF EXISTS videogames,
-;
+DROP TABLE IF EXISTS videogames;
 `)
     .then(
         () => console.log('All tables successfully removed'),
