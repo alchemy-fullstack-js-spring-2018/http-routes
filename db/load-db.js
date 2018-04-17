@@ -13,17 +13,19 @@ const videogamePromises = videogames.map(category => {
 
 });
 
-Promise.all(books.map(book => {
-    return client.query(
+Promise.all(videogamePromises)
+    .then(() => {
+
+        client.query(
+            `
+        SELECT * FROM videogames
         `
-        INSERT INTO /* table */(
-            /* column one */, /* column two */
-        )
-        VALUES ($1, $2);
-        `,
-        [rawData.property1, rawData.property2]
-    );
-}))
+        // [rawData.property1, rawData.property2]
+        );
+    })
+    .then(result => {
+        console.log(result.rows);
+    })
     .then(
         () => console.log('Table successfully populated'),
         err => console.error(err))

@@ -3,6 +3,7 @@
 const { parse } = require('url');
 const videoGames = require('../../lib/routes/videogames');
 const notFound = require('../../lib/routes/not-found');
+const bodyParser = require('body-parser');
 
 const routes = {
     videoGames

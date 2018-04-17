@@ -10,7 +10,10 @@ client.query(`
     );
     INSERT INTO videogames (title, developer) VALUES ('Armello', 'League of Geeks');
     INSERT INTO videogames (title, developer) VALUES ('Night in the Woods', 'Secret Lab');
-`)
+    INSERT INTO videogames (title, developer) VALUES ('Undertale', 'Toby Fox');
+    INSERT INTO videogames (title, developer) VALUES ('Dragon Age', 'Bioware');
+
+    `)
     .then(
         () => console.log('Table successfully created'),
         err => console.error(err)
