@@ -9,9 +9,10 @@ const routes = {
 };
 
 module.exports = (req, res) => {
-    const parsedURL = parse(req.url);
-    req.paths = parsedURL.pathname.slice(1); //subsequent paths can get the parsedURL.
-    const key = req.paths.split('/')[0];
+    const parsedURL = parse(req.url, true);
+    req.query = parsedURL.query;
+    req.paths = parsedURL.pathname.slice(1).split('/'); //subsequent paths can get the parsedURL.path is split into an array of it's parts.
+    const key = req.paths[0];
     const route = routes[key] || notFound;
     route(req, res);
 
