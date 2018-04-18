@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "db:create": "node create-db.js",
+    "db:create": "node db/create-db.js",
     "db:delete": "node drop-tables.js",
     "db:load": "node load-db.js",
     "db:all": "npm run db:drop && npm run db:create && npm run db:load",
