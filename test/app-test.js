@@ -1,3 +1,4 @@
+require('dotenv').config({ path: './test/.env.test' });
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const client = require('../lib/db-client');
@@ -12,14 +13,14 @@ describe('videogame test', () => {
 
     let armello = {
         name: 'Armello',
-        category_id: 1,
-        developer: 'League of Geeks'
+        developer: 'League of Geeks',
+        category_id: 1
     };
 
     let night = {
         name: 'Night in the Woods',
-        category_id: 2,
-        developer: 'Secret Lab'
+        developer: 'Secret Lab',
+        category_id: 2
     };
 
     before(() => {
@@ -32,6 +33,10 @@ describe('videogame test', () => {
                 assert.equal(body.developer, armello.developer);
                 armello = body;
             });
+    });
+
+    it('env works', () => {
+        assert.equal(process.env.DATABASE_URL, 'postgres://jeffreylonergan:datadriver101@localhost:5432/videogames');
     });
 
     it('saves a videogame', () => {
@@ -50,7 +55,7 @@ describe('videogame test', () => {
     it('update a videogame', () => {
         armello.developer = 'League of Geeks';
         return chai.request(app)
-            .put(`/pets/${armello.id}`)
+            .put(`/videogames/${armello.id}`)
             .send(armello)
             .then(({ body }) => {
                 assert.deepEqual(body, armello);

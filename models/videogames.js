@@ -17,24 +17,25 @@ module.exports = {
     insert(videogames) {
         return client.query(`
             INSERT INTO videogames (
-                title, developer, category_id
+                name, developer, category_id
             )
             VALUES ($1, $2, $3)
             RETURNING *;
         `,
-        [videogames.title, videogames.developer, videogames.category_id]
+        [videogames.name, videogames.developer, videogames.category_id]
         ).then(({ rows }) => rows[0]);
     },
     update(videogames) {
         return client.query(`
             UPDATE videogames 
             SET    
-                title = $1, 
+                name = $1, 
                 developer = $2, 
                 category_id = $3, 
+                WHERE id = $4
             RETURNING *;
         `,
-        [videogames.name, videogames.color, videogames.category_id, videogames.description]
+        [videogames.name, videogames.developer, videogames.category_id, videogames.id]
         ).then(({ rows }) => rows[0]);
     },
     delete(id) {
