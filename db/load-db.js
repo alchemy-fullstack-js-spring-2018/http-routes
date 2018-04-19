@@ -3,13 +3,16 @@
 
 
 const client = require('../lib/db-client');
-const videogames = ['Armello', 'Night in the Woods', 'Undertale', 'Dragon Age'];
+const videogames = [{ name:'Armello', developer:'League of Geeks' }, 
+    { name: 'Night in the Woods', developer:'Secret Lab' }, 
+    { name:'Undertale', developer:'Toby Fox' },
+    { name:'Dragon Age', developer:'Bioware' }]; 
 
 const videogamePromises = videogames.map(category => {
     return client.query(`
         INSERT INTO  videogames(name, developer)
         VALUES($1,$2)
-    `,
+        ON CONFLICT DO NOTHING`,
     [category.name, category.developer]
     );
 

@@ -2,9 +2,9 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const client = require('../lib/db-client');
 const app = require('../lib/app');
-
 const { assert } = chai;
 chai.use(chaiHttp);
+// const db = require('../db/create-db');
 
 describe('videogame test', () => {
 
@@ -73,7 +73,7 @@ describe('videogame test', () => {
 
     });
 
-    it('removes a pet', () => {
+    it('removes a videogame', () => {
         return chai.request(app)
             .del(`/videogames/${night.id}`)
             .then(() => {
