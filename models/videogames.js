@@ -1,5 +1,4 @@
 const client = require('../lib/db-client');
-
 module.exports = {
     selectAll() {
         return client.query('SELECT * FROM videogames')
