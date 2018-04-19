@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 describe('Dogs', () => {
 
-    // before(() => client.query('DELETE FROM dogs'));
+    before(() => client.query('DELETE FROM dogs'));
 
     after(() => {
         client.end();
@@ -37,5 +37,13 @@ describe('Dogs', () => {
 
     it('saves a dog', () => {
         assert.ok(dawson.id);
+    });
+
+    it('gets id of dog', () => {
+        return chai.request(app)
+            .get(`/dogs/${dawson.id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, dawson);
+            });
     });
 });
