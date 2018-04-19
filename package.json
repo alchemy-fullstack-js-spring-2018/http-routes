@@ -2,7 +2,7 @@
   "name": "http-routes",
   "version": "1.0.0",
   "description": "http-routes assignment for alchemy code lab",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
