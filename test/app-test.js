@@ -60,7 +60,7 @@ describe('videogame test', () => {
             .then(({ body }) => {
                 assert.deepEqual(body, armello);
             });
-
+        /*eslint-disable-next-line*/
     });
 
     it('gets all videogames', () => {
