@@ -19,10 +19,10 @@ describe('Dogs', () => {
         color: 'white/grey'
     };
 
-    // let beau = {
-    //     breed: 'Golden Retriever',
-    //     color: 'golden'
-    // };
+    let beau = {
+        breed: 'Golden Retriever',
+        color: 'golden'
+    };
 
     before(() => {
         return chai.request(app)
@@ -57,4 +57,17 @@ describe('Dogs', () => {
             });
     });
 
+    it('gets both dogs', () => {
+        return chai.request(app)
+            .post('/dogs')
+            .send(beau)
+            .then(({ body }) => {
+                beau = body;
+                return chai.request(app)
+                    .get('/dogs');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [dawson, beau]);
+            });
+    });
 });
