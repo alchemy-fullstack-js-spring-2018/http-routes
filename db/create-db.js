@@ -5,8 +5,8 @@ client.query(`
   
   CREATE TABLE IF NOT EXISTS dogs(
     id SERIAL PRIMARY KEY,
-    title VARCHAR(256),
-    author VARCHAR(256)
+    breed VARCHAR(256),
+    color VARCHAR(256)
   );
 `)
     .then(

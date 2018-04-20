@@ -13,4 +13,4 @@ DROP TABLE dogs
     )
     .then(() => {
         client.end();
-    });
+    }); 
