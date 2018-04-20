@@ -5,6 +5,6 @@ node_js:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database videogames;' -U postgres
+  - psql -c 'create database videogames;' -U jeffreylonergan
   - npm run db:create
   - npm run db:load
