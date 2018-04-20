@@ -70,4 +70,16 @@ describe('Dogs', () => {
                 assert.deepEqual(body, [dawson, beau]);
             });
     });
+
+    it('deletes a dog if given id', () => {
+        return chai.request(app)
+            .del(`/dogs/${beau.id}`)
+            .then(() => {
+                return chai.request(app)
+                    .get('/dogs');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [dawson]);
+            });
+    });
 });
