@@ -46,4 +46,15 @@ describe('Dogs', () => {
                 assert.deepEqual(body, dawson);
             });
     });
+
+    it('updates breed of dog', () => {
+        dawson.breed = 'pit';
+        return chai.request(app)
+            .put(`/dogs/${dawson.id}`)
+            .send(dawson)
+            .then(({ body }) => {
+                assert.deepEqual(body, dawson);
+            });
+    });
+
 });
