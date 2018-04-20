@@ -33,7 +33,7 @@ describe('videogame test', () => {
     });
 
     it('env works', () => {
-        assert.equal(process.env.DATABASE_URL, 'postgres://jeffreylonergan:datadriver101@localhost:5432/videogames');
+        assert.equal(process.env.DATABASE_URL, 'postgres://postgres:datadriver101@localhost:5432/videogames');
     });
 
     it('saves a videogame', () => {
