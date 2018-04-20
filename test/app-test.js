@@ -14,13 +14,11 @@ describe('videogame test', () => {
     let armello = {
         name: 'Armello',
         developer: 'League of Geeks',
-        category_id: 1
     };
 
     let night = {
         name: 'Night in the Woods',
         developer: 'Secret Lab',
-        category_id: 2
     };
 
     before(() => {
@@ -29,7 +27,6 @@ describe('videogame test', () => {
             .send(armello)
             .then(({ body }) => {
                 assert.equal(body.name, armello.name);
-                assert.equal(body.category_id, armello.category_id);
                 assert.equal(body.developer, armello.developer);
                 armello = body;
             });

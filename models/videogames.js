@@ -16,12 +16,12 @@ module.exports = {
     insert(videogames) {
         return client.query(`
             INSERT INTO videogames (
-                name, developer, category_id
+                name, developer
             )
-            VALUES ($1, $2, $3)
+            VALUES ($1, $2)
             RETURNING *;
         `,
-        [videogames.name, videogames.developer, videogames.category_id]
+        [videogames.name, videogames.developer]
         ).then(({ rows }) => rows[0]);
     },
     update(videogames) {
@@ -29,12 +29,11 @@ module.exports = {
             UPDATE videogames 
             SET    
                 name = $1, 
-                developer = $2, 
-                category_id = $3, 
-                WHERE id = $4
+                developer = $2 
+                WHERE id = $3
             RETURNING *;
         `,
-        [videogames.name, videogames.developer, videogames.category_id, videogames.id]
+        [videogames.name, videogames.developer, videogames.id]
         ).then(({ rows }) => rows[0]);
     },
     delete(id) {
